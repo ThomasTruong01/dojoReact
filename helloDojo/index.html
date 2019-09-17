@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script
+			crossorigin
+			src="https://unpkg.com/react@16/umd/react.development.js"
+		></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+		></script>
+		<script>
+			console.log(React);
+			console.log(ReactDOM);
+		</script>
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script>
+			// React.createElement('h2', null, 'Time is: ' + returnTime());
+			const h1 = React.createElement('h1', null, 'Hello Dojo!');
+			const h2 = React.createElement('h2', null, 'Things I need to do:');
+			const toDo = [
+				'Learn React',
+				'Climb Mt. Everest',
+				'Run a marathon',
+				'Feed the dogs'
+			];
+			const todoList = toDo.map((item, x) => {
+				reactCom = React.createElement('li', { key: x }, item);
+				console.log(reactCom);
+				return reactCom;
+			});
+			const ul = React.createElement(
+				'ul',
+				null,
+				toDo.map((item, x) => {
+					return React.createElement('li', { key: x }, item);
+				})
+			);
+
+			ReactDOM.render([h1, h2, ul], document.getElementById('app'));
+		</script>
+	</body>
+</html>
