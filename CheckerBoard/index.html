@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script
+			crossorigin
+			src="https://unpkg.com/react@16/umd/react.development.js"
+		></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+		></script>
+		<title>Composable Squares</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script>
+			function CheckerBoard(props) {
+				const newArr = Array(props.x).fill(0);
+				return React.createElement(
+					'div',
+					{ className: 'CheckerBoard' },
+					newArr.map((item, y) => {
+						props = { ...props, ...{ y: y } };
+						return React.createElement(Row, props);
+					})
+				);
+			}
+			const Row = props => {
+				const newArr = Array(props.x).fill(0);
+				let cellProps = {};
+				return React.createElement(
+					'div',
+					{ className: 'row', style: props.row },
+					newArr.map((item, x) => {
+						if ((x + parseInt(props.y)) % 2 == 0) {
+							cellProps = { ...props.cell, ...props.colorA };
+						} else {
+							cellProps = { ...props.cell, ...props.colorB };
+						}
+						return React.createElement(Cell, cellProps);
+					})
+				);
+				/*Some UI... perhaps a list of cells?*/
+			};
+			function Cell(props) {
+				return React.createElement('div', { style: props }, null);
+			}
+			// // And feel free to use the following object:
+			var styles = {
+				row: { height: '20px' },
+				cell: { height: '20px', width: '20px', display: 'inline-block' },
+				colorA: { backgroundColor: 'black' },
+				colorB: { backgroundColor: 'red' },
+				x: 10
+			};
+
+			ReactDOM.render(
+				React.createElement(CheckerBoard, styles),
+				document.getElementById('app')
+			);
+		</script>
+	</body>
+</html>
