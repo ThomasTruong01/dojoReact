@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script
+			crossorigin
+			src="https://unpkg.com/react@16/umd/react.development.js"
+		></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+		></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script>
+			console.log(React);
+			console.log(ReactDOM);
+		</script>
+		<link
+			href="https://fonts.googleapis.com/css?family=Chilanka&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			body {
+				background-color: rgba(0, 0, 0, 0.8);
+			}
+			.container {
+				width: 600px;
+				border-radius: 35px;
+				border: 5px solid lightblue;
+				margin: 25px auto;
+				background-color: white;
+			}
+			h1 {
+				text-align: center;
+				font-size: 3rem;
+				font-family: 'Chilanka', cursive;
+			}
+			ul {
+				padding: 0;
+				list-style: none;
+			}
+			.fwName {
+				font-size: 2rem;
+				font-family: 'Chilanka', cursive;
+			}
+			.frameWork {
+				height: 75px;
+				width: 50%;
+				border: 2px solid black;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-radius: 37px;
+				margin: 5px auto;
+			}
+			.voteCircle {
+				height: 50px;
+				width: 50px;
+				margin-left: 5px;
+				border-radius: 50%;
+				border: 5px solid blue;
+				text-align: center;
+				align-self: center;
+				font-size: 2em;
+			}
+			.voteCount {
+				vertical-align: center;
+				margin: 7px;
+			}
+			.vote {
+				/* height: 50px;
+				width: 50px; */
+				margin-right: 5px;
+				font-size: 6rem;
+				font-weight: bolder;
+				color: green;
+				margin-bottom: 12px;
+			}
+		</style>
+
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			const Votes = { React: 0, Redux: 0, Node: 0, Express: 0 };
+			const jsFrameworks = ['React', 'Redux', 'Node', 'Express'];
+			function castVotes(e) {
+				const myVote = e.target.parentElement.querySelector('.fwName')
+					.innerText;
+				Votes[myVote]++;
+				const voteCout = (e.target.parentElement.querySelector(
+					'.voteCount'
+				).innerText = Votes[myVote]);
+			}
+
+			const List = props => {
+				const myItems = Object.keys(props.items);
+				console.log('list', myItems);
+				const listItems = Object.keys(props.items).map(itemString => {
+					return (
+						<div key={itemString} className='frameWork'>
+							<div className='voteCircle'>
+								<div className='voteCount'>0</div>
+							</div>
+							<div className='fwName'>{itemString}</div>
+							<div className='vote' onClick={e => castVotes(e)}>
+								+
+							</div>
+						</div>
+					);
+				});
+				return (
+					<div className='container'>
+						<h1>My Voting Booth</h1>
+						<ul>{listItems}</ul>
+					</div>
+				);
+			};
+			ReactDOM.render(<List items={Votes} />, document.getElementById('app'));
+		</script>
+	</body>
+</html>
